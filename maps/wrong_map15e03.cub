@@ -1,0 +1,14 @@
+R 1920 1080
+NO ./wrongpath
+SO ./wrongpath
+WE ./wrongpath
+EA ./wrongpath
+S ./wrongpath
+F 220,100,0
+C 225,30,0
+
+111111
+100101
+102001
+1100N1
+111111
