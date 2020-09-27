@@ -1,21 +1,20 @@
-// #include <stdio.h>
 #include "../inc/cub3d.h"
 
-void	ft_error()
+void	ft_error(void)
 {
 	printf("y a une erreur\n");
 }
 
 //read une seconde fois pour recuperer la map
-int  ft_parsing_map(char *fichier, t_recup *recup)
+int		ft_parsing_map(char *fichier, t_recup *recup)
 {
 	int			fd;
 	int			ret;
-	char		*str = NULL;
+	char		*str;
 
 	ret = 1;
+	str = NULL;
 	fd = open(fichier, O_RDONLY);
-	ft_initialisation(recup);
 	if (!(recup->map = malloc(sizeof(char*) * recup->nblines)))
 		return (0);
 	while (ret != 0)
@@ -27,7 +26,7 @@ int  ft_parsing_map(char *fichier, t_recup *recup)
 	}
 	close(fd);
 	if (ft_murs(recup) == 1)
-		ft_error();
+		write(1, "Error\nMap non entouree de 1\n", 28);
 	ft_init_sprite(recup);
 	ft_mlx(recup);
 	return (0);
@@ -39,9 +38,11 @@ void	ft_parsing(char *fichier)
 	int			fd;
 	int			ret;
 	t_recup		recup;
-	char		*str = NULL;
+	char		*str;
 
 	ret = 1;
+	str = NULL;
+	ft_initialisation(&recup);
 	fd = open(fichier, O_RDONLY);
 	while (ret != 0)
 	{
@@ -59,6 +60,7 @@ void	ft_parsing(char *fichier)
 int		ft_cub(char *str)
 {
 	int i;
+
 	i = 0;
 	while (str[i] != '\0')
 		i++;
@@ -67,14 +69,14 @@ int		ft_cub(char *str)
 		i--;
 		if (i == 0)
 		{
-			ft_error();
+			write(1, "Error\nNom de la map invalide\n", 29);
 			return (0);
 		}
 	}
 	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
 		ft_parsing(str);
 	else
-		ft_error();
+		write(1, "Error\nNom de la map invalide\n", 29);
 	return (0);
 }
 
@@ -83,6 +85,5 @@ int		main(int argc, char **argv)
 	if (argc >= 2)
 		ft_cub(argv[1]);
 	else
-		ft_error();
-  //system("leaks a.out");
+		write(1, "Error\nNombre d'arguments invalide\n", 35);
 }

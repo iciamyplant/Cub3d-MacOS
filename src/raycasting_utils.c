@@ -52,7 +52,7 @@ void	ft_drawStartEnd(t_recup *recup)
 			recup->ray.perpWallDist = ((double)recup->ray.mapX - recup->ray.posX + (1 - (double)recup->ray.stepX) / 2) / recup->ray.rayDirX;
 		else
 			recup->ray.perpWallDist = ((double)recup->ray.mapY - recup->ray.posY + (1 - (double)recup->ray.stepY) / 2) / recup->ray.rayDirY;
-	// calcul de la hauteur de la ligne a dessiner	
+		// calcul de la hauteur de la ligne a dessiner	
 		recup->ray.lineHeight = (int)(recup->Ry / recup->ray.perpWallDist);
 		recup->ray.drawStart = - recup->ray.lineHeight / 2 + recup->Ry / 2;
 		if (recup->ray.drawStart < 0)

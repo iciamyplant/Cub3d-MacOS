@@ -1,22 +1,67 @@
 #include "../inc/cub3d.h"
 
+int		ft_atoi2(const char *str, t_recup *recup)
+{
+	int		signe;
+	int		sum;
+
+	sum = 0;
+	signe = 1;
+	while (str[recup->i] == ' ' || str[recup->i] == '\t'
+			|| str[recup->i] == ',' || str[recup->i] == '\n'
+			|| str[recup->i] == '\r' || str[recup->i] == '\v'
+			|| str[recup->i] == '\f')
+		recup->i++;
+	if (str[recup->i] == '-' || str[recup->i] == '+')
+	{
+		if (str[recup->i] == '-')
+			signe = -1;
+		recup->i++;
+	}
+	while (str[recup->i] >= '0' && str[recup->i] <= '9')
+	{
+		sum = (sum * 10) + (str[recup->i] - 48);
+		recup->i++;
+	}
+	return (sum * signe);
+}
+
+int		ft_atoi3(const char *str, t_recup *recup)
+{
+	int		sum;
+
+	sum = 0;
+	while (str[recup->i] == ' ' || str[recup->i] == '\t'
+			|| str[recup->i] == ',' || str[recup->i] == '\n'
+			|| str[recup->i] == '\r' || str[recup->i] == '\v'
+			|| str[recup->i] == '\f')
+	{
+		recup->i++;
+		while (str[recup->i] >= '0' && str[recup->i] <= '9')
+		{
+			sum = (sum * 10) + (str[recup->i] - 48);
+			recup->i++;
+		}
+	}
+	return (sum);
+}
+
 char	*ft_path_texture(char *str)
 {
-	int i;
-	int j;
-	char *copie;
+	int		i;
+	int		j;
+	char	*copie;
 
 	i = 0;
 	j = 0;
-	while (str[j] != '.')
+	if (ft_charinstr(str, '.') == 0 || ft_charinstr(str, '/') == 0
+			|| ft_strlen2(str) <= 2)
 	{
-		j++;
-		if (str[j] == '\0')
-		{
-			ft_error();
-			return (NULL);
-		}
+		write(1, "Error\nPath texture invalide\n", 28);
+		return (NULL);
 	}
+	while (str[j] != '.')
+		j++;
 	if (!(copie = (malloc(sizeof(char) * (ft_strlen2(str) + 1)))))
 		return (NULL);
 	while (str[j] != '\0')
@@ -32,26 +77,34 @@ char	*ft_path_texture(char *str)
 //parse pour NO, SO, WE, EA, S
 void	ft_texture(char *str, t_recup *recup)
 {
-	int i;
+	int			i;
+	static int	j = 0;
+
 	i = 0;
 	if (str[i] == 'N' && str[i + 1] == 'O')
 		recup->NO = ft_path_texture(str);
-	if (str[i] == 'S' && str[i + 1] == 'O')
+	else if (str[i] == 'S' && str[i + 1] == 'O')
 		recup->SO = ft_path_texture(str);
-	if (str[i] == 'W' && str[i + 1] == 'E')
+	else if (str[i] == 'W' && str[i + 1] == 'E')
 		recup->WE = ft_path_texture(str);
-	if (str[i] == 'E' && str[i + 1] == 'A')
+	else if (str[i] == 'E' && str[i + 1] == 'A')
 		recup->EA = ft_path_texture(str);
-	if (str[i] == 'S' && str[i + 1] != 'O')
+	else if (str[i] == 'S' && str[i + 1] != 'O')
 		recup->S = ft_path_texture(str);
+	j++;
 }
 
 //parse pour R F et C
 void	ft_color_resolution(char *str, t_recup *recup)
 {
 	int			i;
+
 	i = 0;
 	recup->i = 1;
+	if ((recup->sizeline > 0 || recup->nblines > 0) && (recup->NO == NULL
+				|| recup->SO == NULL || recup->WE == NULL
+				|| recup->EA == NULL || recup->S == NULL))
+		write(1, "Error\nMap avant elements\n", 25);
 	while (str[i] != '\0')
 	{
 		if (str[i] == 'R')

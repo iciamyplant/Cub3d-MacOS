@@ -45,6 +45,7 @@ int		ft_raycasting(t_recup *recup)
 		ft_incrementray(recup);
 		ft_drawStartEnd(recup);
 		ft_color_column(recup);
+		recup->s.ZBuffer[recup->ray.x] = recup->ray.perpWallDist;
 		recup->ray.x++;
 	}
 	ft_sprite(recup);

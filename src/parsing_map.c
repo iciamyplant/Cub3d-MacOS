@@ -1,17 +1,10 @@
 #include "../inc/cub3d.h"
 
-void	ft_initialisation(t_recup *recup)
-{
-	recup->map = NULL;
-	recup->dx = 0;
-	recup->dy = 0;
-	recup->depart = 'x';
-}
-
 //renvoie 1 si la map n'est pas entouree de murs 0 si tout est ok
 int		ft_murs(t_recup *recup)
 {
 	int i;
+
 	i = 0;
 	while (i < recup->nblines)
 	{
@@ -67,6 +60,7 @@ int		ft_copy_map(char *str, t_recup *recup)
 int		ft_is_map(char *str)
 {
 	int i;
+
 	i = 0;
 	if (ft_charinstr(str, '1') == 1)
 	{
@@ -107,6 +101,7 @@ void	ft_init_sprite(t_recup *recup)
 	int i = 0;
 	int j = 0;
 	int	v = 0;
+
 	recup->s.nbspr = 0;
 	while (i < recup->nblines)
 	{
@@ -120,11 +115,11 @@ void	ft_init_sprite(t_recup *recup)
 		i++;
 	}
 	if (!(recup->sxy = (t_sprxy *)malloc(sizeof(t_sprxy) * recup->s.nbspr)))
-		printf("erreur malloc sxy* ");
+		write(1, "Error\nMalloc sxy*", 20);
 	if (!(recup->s.order = (int *)malloc(sizeof(int) * recup->s.nbspr)))
-		printf("erreur malloc s.order*");
+		write(1, "Error\nMalloc s.order*", 24);
 	if (!(recup->s.dist = (double *)malloc(sizeof(double) * recup->s.nbspr)))
-		printf("erreur malloc s.dist*");
+		write(1, "Error\nMalloc s.dist*", 23);
 	i = 0;
 	j = 0;
 	while (i < recup->nblines)

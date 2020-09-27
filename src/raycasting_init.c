@@ -2,6 +2,8 @@
 
 void	ft_initialisation2(t_recup *recup)
 {
+	if (!(recup->s.ZBuffer = (double *)malloc(sizeof(double) * recup->Rx)))
+		exit(0);
 	recup->data.forward = 0;
 	recup->data.back = 0;
 	recup->data.left = 0;
@@ -12,6 +14,7 @@ void	ft_initialisation2(t_recup *recup)
 	recup->ray.posY = (double)recup->dy;
 	ft_orientationdir(recup); //initialise dirX et dirY selon N S E W initial
 	ft_orientationplan(recup); //initialise planX et planY selon N S E W initial
+
 }
 
 void	ft_initialisation3(t_recup *recup)

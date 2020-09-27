@@ -147,14 +147,14 @@ int			ft_parsing_map(char *fichier, t_recup *recup);
 void		ft_error();
 void		ft_imprime_map(t_recup *recup);
 //parsing_utils.c
-int			ft_atoi2(const char *str, t_recup *recup);
-int			ft_atoi3(const char *str, t_recup *recup);
 int			ft_strlen2(char *str);
 int			ft_charinstr(char *str, char c);
 int			ft_murs_util(char *str);
 int			ft_depart(char c, t_recup *recup, int i, int j);
 //parsing_color_resolution_texture.c
 void		ft_color_resolution(char *str, t_recup *recup);
+int			ft_atoi2(const char *str, t_recup *recup);
+int			ft_atoi3(const char *str, t_recup *recup);
 void    	ft_texture(char *str, t_recup *recup);
 char		*ft_path_texture(char *str);
 //parsing_map.c
