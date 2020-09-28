@@ -9,19 +9,19 @@ void	ft_get_texture(t_recup *recup)
 	recup->texture[4].mlx_ptr = mlx_init();
 	if (!(recup->texture[0].img = mlx_xpm_file_to_image(recup->texture[0].mlx_ptr, \
 			recup->NO, &(recup->texture[0].width), &(recup->texture[0].height))))
-			printf("erreur texture NO\n");
+			ft_error(recup, "Texture NO\n");
 	if (!(recup->texture[1].img = mlx_xpm_file_to_image(recup->texture[1].mlx_ptr, \
 			recup->SO, &(recup->texture[1].width), &(recup->texture[1].height))))
-			printf("erreur texture SO\n");
+			ft_error(recup, "Texture SO\n");
 	if (!(recup->texture[2].img = mlx_xpm_file_to_image(recup->texture[2].mlx_ptr, \
 			recup->WE, &(recup->texture[2].width), &(recup->texture[2].height))))
-			printf("erreur texture WE\n");
+			ft_error(recup, "Texture WE\n");
 	if (!(recup->texture[3].img = mlx_xpm_file_to_image(recup->texture[3].mlx_ptr, \
 			recup->EA, &(recup->texture[3].width), &(recup->texture[3].height))))
-			printf("erreur texture EA\n");
+			ft_error(recup, "Texture EA\n");
 	if (!(recup->texture[4].img = mlx_xpm_file_to_image(recup->texture[4].mlx_ptr, \
 			recup->S, &(recup->texture[4].width), &(recup->texture[4].height))))
-			printf("erreur texture S\n");
+			ft_error(recup, "Texture S\n");
 	recup->texture[0].addr = mlx_get_data_addr(recup->texture[0].img, &recup->texture[0].bits_per_pixel, \
 	 		&recup->texture[0].line_length, &recup->texture[0].endian);
 	recup->texture[1].addr = mlx_get_data_addr(recup->texture[1].img, &recup->texture[1].bits_per_pixel, \
@@ -59,7 +59,6 @@ int		ft_raycasting(t_recup *recup)
 
 int		ft_mlx(t_recup *recup)
 {
-	//int i = 0;
 	ft_initialisation2(recup);
 	ft_get_texture(recup);
 	recup->data.mlx_ptr = mlx_init();
@@ -70,13 +69,6 @@ int		ft_mlx(t_recup *recup)
 
 	mlx_hook(recup->data.mlx_win, 2, 1L<<0, ft_key_press, recup);
 	mlx_loop_hook(recup->data.mlx_ptr, ft_raycasting, recup);
-	printf("recup->s.nbspr : %d\n", recup->s.nbspr);
-	/*while (i < recup->s.nbspr)
-	{
-		printf("recup->s.dist[%d] = %f\n", i, recup->s.dist[i]);
-		printf("recup->s.order[%d] = %d\n", i, recup->s.order[i]);
-		i++;
-	}*/
 	mlx_hook(recup->data.mlx_win, 3, 1L<<1, ft_key_release, recup);
 	mlx_loop(recup->data.mlx_ptr);
 	return (0);

@@ -9,7 +9,8 @@ SRC =	minimap.c \
 		hitpoints.c \
 		raycasting_move.c \
 		raycasting.c \
-		sprites.c
+		sprites.c \
+		errors.c
 
 NAME = Cub3D
 

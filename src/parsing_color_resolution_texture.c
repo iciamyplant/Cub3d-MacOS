@@ -46,7 +46,7 @@ int		ft_atoi3(const char *str, t_recup *recup)
 	return (sum);
 }
 
-char	*ft_path_texture(char *str)
+char	*ft_path_texture(char *str, t_recup *recup)
 {
 	int		i;
 	int		j;
@@ -57,7 +57,7 @@ char	*ft_path_texture(char *str)
 	if (ft_charinstr(str, '.') == 0 || ft_charinstr(str, '/') == 0
 			|| ft_strlen2(str) <= 2)
 	{
-		write(1, "Error\nPath texture invalide\n", 28);
+		ft_error(recup, "Path texture invalide\n");
 		return (NULL);
 	}
 	while (str[j] != '.')
@@ -82,15 +82,15 @@ void	ft_texture(char *str, t_recup *recup)
 
 	i = 0;
 	if (str[i] == 'N' && str[i + 1] == 'O')
-		recup->NO = ft_path_texture(str);
+		recup->NO = ft_path_texture(str, recup);
 	else if (str[i] == 'S' && str[i + 1] == 'O')
-		recup->SO = ft_path_texture(str);
+		recup->SO = ft_path_texture(str, recup);
 	else if (str[i] == 'W' && str[i + 1] == 'E')
-		recup->WE = ft_path_texture(str);
+		recup->WE = ft_path_texture(str, recup);
 	else if (str[i] == 'E' && str[i + 1] == 'A')
-		recup->EA = ft_path_texture(str);
+		recup->EA = ft_path_texture(str, recup);
 	else if (str[i] == 'S' && str[i + 1] != 'O')
-		recup->S = ft_path_texture(str);
+		recup->S = ft_path_texture(str, recup);
 	j++;
 }
 
@@ -104,18 +104,28 @@ void	ft_color_resolution(char *str, t_recup *recup)
 	if ((recup->sizeline > 0 || recup->nblines > 0) && (recup->NO == NULL
 				|| recup->SO == NULL || recup->WE == NULL
 				|| recup->EA == NULL || recup->S == NULL))
-		write(1, "Error\nMap avant elements\n", 25);
+		ft_error(recup, "Map avant elements\n");
 	while (str[i] != '\0')
 	{
 		if (str[i] == 'R')
 		{
+			if (recup->sizeline > 0 || recup->nblines > 0)
+				ft_error(recup, "Map avant elements\n");
 			recup->Rx = ft_atoi2(str, recup);
 			recup->Ry = ft_atoi2(str, recup);
 		}
 		else if (str[i] == 'F')
+		{
+			if (recup->sizeline > 0 || recup->nblines > 0)
+				ft_error(recup, "Map avant elements\n");
 			recup->F = ft_atoi3(str, recup);
+		}
 		else if (str[i] == 'C')
+		{
+			if (recup->sizeline > 0 || recup->nblines > 0)
+				ft_error(recup, "Map avant elements\n");
 			recup->C = ft_atoi3(str, recup);
+		}
 		i++;
 	}
 }

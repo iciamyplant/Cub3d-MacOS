@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 18:19:22 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/09/27 18:25:45 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/09/28 16:59:02 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int		ft_depart(char c, t_recup *recup, int i, int j)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
+		if (recup->depart != 'x')
+			ft_error(recup, "Plus d'un joueur dans la map");
 		recup->depart = c;
 		recup->dx = i;
 		recup->dy = j;
@@ -77,6 +79,10 @@ void	ft_initialisation(t_recup *recup)
 	recup->WE = NULL;
 	recup->EA = NULL;
 	recup->S = NULL;
+	recup->F = 0;
+	recup->C = 0;
+	recup->Rx = 0;
+	recup->Ry = 0;
 	recup->nblines = 0;
 	recup->sizeline = 0;
 	recup->map = NULL;

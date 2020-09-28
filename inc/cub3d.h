@@ -131,6 +131,7 @@ typedef struct		s_recup
 	char		depart; //position depart : N S E W
 	int			dx; //x de position depart
 	int			dy; //y position depart
+	int			indicateur;
 	t_data		texture[5];
 	t_data		data;
 	t_ray		ray;
@@ -142,9 +143,8 @@ typedef struct		s_recup
 //--------------PARSING----------------//
 //parsing.c
 int			ft_cub(char *str);
-void		ft_parsing(char *fichier);
+void		ft_parsing(char *fichier, t_recup *recup);
 int			ft_parsing_map(char *fichier, t_recup *recup);
-void		ft_error();
 void		ft_imprime_map(t_recup *recup);
 //parsing_utils.c
 int			ft_strlen2(char *str);
@@ -156,7 +156,7 @@ void		ft_color_resolution(char *str, t_recup *recup);
 int			ft_atoi2(const char *str, t_recup *recup);
 int			ft_atoi3(const char *str, t_recup *recup);
 void    	ft_texture(char *str, t_recup *recup);
-char		*ft_path_texture(char *str);
+char		*ft_path_texture(char *str, t_recup *recup);
 //parsing_map.c
 void		ft_initialisation(t_recup *recup);
 int			ft_murs(t_recup *recup);
@@ -181,6 +181,7 @@ void		ft_initialisation3(t_recup *recup);
 void		ft_orientationdir(t_recup *recup);
 void		ft_orientationplan(t_recup *recup);
 void		ft_init_texture(t_recup *recup);
+void		ft_init_sprite2(t_recup *recup, int i, int j, int v);
 //raycasting_utils.c
 void		ft_stepsideDist(t_recup *recup);
 void		ft_incrementray(t_recup *recup);
@@ -189,8 +190,10 @@ void		ft_drawStartEnd(t_recup *recup);
 void		ft_forward_back(t_recup *recup);
 void		ft_left_right(t_recup *recup);
 void		ft_rotate_right_left(t_recup *recup);
-
-
+//errors.c
+void		ft_error(t_recup *recup, char *str);
+void		ft_exit(t_recup *recup);
+void		ft_verify_errors(t_recup *recup);
 //--------------SPRITES----------------//
 //sprites.c
 void		ft_sprite(t_recup *recup);

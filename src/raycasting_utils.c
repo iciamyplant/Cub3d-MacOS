@@ -67,3 +67,51 @@ void	ft_drawStartEnd(t_recup *recup)
 				recup->ray.color = 22520000;
 		}
 }
+
+void	ft_orientationdir(t_recup *recup)
+{
+	if (recup->depart == 'N')
+	{
+		recup->ray.dirX = -1;
+		recup->ray.dirY = 0;
+	}
+	if (recup->depart == 'S')
+	{
+		recup->ray.dirX = 1;
+		recup->ray.dirY = 0;
+	}
+	if (recup->depart == 'E')
+	{
+		recup->ray.dirX = 0;
+		recup->ray.dirY = 1;
+	}
+	if (recup->depart == 'W')
+	{
+		recup->ray.dirX = 0;
+		recup->ray.dirY = -1;
+	}
+}
+
+void	ft_orientationplan(t_recup *recup)
+{
+	if (recup->depart == 'N')
+	{
+		recup->ray.planX = 0;
+		recup->ray.planY = 0.66;
+	}
+	if (recup->depart == 'S')
+	{
+		recup->ray.planX = 0;
+		recup->ray.planY = -0.66;
+	}
+	if (recup->depart == 'E')
+	{
+		recup->ray.dirX = 0.66;
+		recup->ray.dirY = 0;
+	}
+	if (recup->depart == 'W')
+	{
+		recup->ray.dirX = -0.66;
+		recup->ray.dirY = 0;
+	}
+}
