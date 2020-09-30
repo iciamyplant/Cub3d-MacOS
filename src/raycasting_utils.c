@@ -5,23 +5,28 @@ void	ft_stepsideDist(t_recup *recup) //calcul de stepX, stepY, sideDistX et side
 		if (recup->ray.rayDirX < 0)
 		{
 			recup->ray.stepX = -1;
-			recup->ray.sideDistX = (recup->ray.posX - recup->ray.mapX) * recup->ray.deltaDistX;
+			recup->ray.sideDistX = (recup->ray.posX - recup->ray.mapX) \
+								   * recup->ray.deltaDistX;
 		}
 		else
 		{
 			recup->ray.stepX = 1;
-			recup->ray.sideDistX = (recup->ray.mapX + 1.0 - recup->ray.posX) * recup->ray.deltaDistX;
+			recup->ray.sideDistX = (recup->ray.mapX + 1.0 - recup->ray.posX) \
+								   * recup->ray.deltaDistX;
 		}
 		if (recup->ray.rayDirY < 0)
 		{
 			recup->ray.stepY = -1;
-			recup->ray.sideDistY = (recup->ray.posY - recup->ray.mapY) * recup->ray.deltaDistY;
+			recup->ray.sideDistY = (recup->ray.posY - recup->ray.mapY) \
+								   * recup->ray.deltaDistY;
 		}
 		else
 		{
 			recup->ray.stepY = 1;
-			recup->ray.sideDistY = (recup->ray.mapY + 1.0 - recup->ray.posY) * recup->ray.deltaDistY;
+			recup->ray.sideDistY = (recup->ray.mapY + 1.0 - recup->ray.posY) \
+								   * recup->ray.deltaDistY;
 		}
+		ft_incrementray(recup);
 }
 
 void	ft_incrementray(t_recup *recup) //tant qu'on a pas touche un mur on passe au carre suivant soit dans la direction x soit direction y
@@ -42,16 +47,19 @@ void	ft_incrementray(t_recup *recup) //tant qu'on a pas touche un mur on passe a
 		}
 		if (recup->map[recup->ray.mapX][recup->ray.mapY] == '1')
 			recup->ray.hit = 1;
-		}
+	}
+		ft_drawStartEnd(recup);
 }
 
 void	ft_drawStartEnd(t_recup *recup)
 {
 	//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
 		if (recup->ray.side == 0)
-			recup->ray.perpWallDist = ((double)recup->ray.mapX - recup->ray.posX + (1 - (double)recup->ray.stepX) / 2) / recup->ray.rayDirX;
+			recup->ray.perpWallDist = ((double)recup->ray.mapX - \
+					recup->ray.posX + (1 - (double)recup->ray.stepX) / 2) / recup->ray.rayDirX;
 		else
-			recup->ray.perpWallDist = ((double)recup->ray.mapY - recup->ray.posY + (1 - (double)recup->ray.stepY) / 2) / recup->ray.rayDirY;
+			recup->ray.perpWallDist = ((double)recup->ray.mapY - \
+					recup->ray.posY + (1 - (double)recup->ray.stepY) / 2) / recup->ray.rayDirY;
 		// calcul de la hauteur de la ligne a dessiner	
 		recup->ray.lineHeight = (int)(recup->Ry / recup->ray.perpWallDist);
 		recup->ray.drawStart = - recup->ray.lineHeight / 2 + recup->Ry / 2;
@@ -60,58 +68,4 @@ void	ft_drawStartEnd(t_recup *recup)
 		recup->ray.drawEnd = recup->ray.lineHeight / 2 + recup->Ry / 2;
 		if (recup->ray.drawEnd >= recup->Ry)
 			recup->ray.drawEnd = recup->Ry - 1;
-		if (recup->map[recup->ray.mapX][recup->ray.mapY] == '1')
-		{
-			recup->ray.color = 22620000;
-			if (recup->ray.side == 1)
-				recup->ray.color = 22520000;
-		}
-}
-
-void	ft_orientationdir(t_recup *recup)
-{
-	if (recup->depart == 'N')
-	{
-		recup->ray.dirX = -1;
-		recup->ray.dirY = 0;
-	}
-	if (recup->depart == 'S')
-	{
-		recup->ray.dirX = 1;
-		recup->ray.dirY = 0;
-	}
-	if (recup->depart == 'E')
-	{
-		recup->ray.dirX = 0;
-		recup->ray.dirY = 1;
-	}
-	if (recup->depart == 'W')
-	{
-		recup->ray.dirX = 0;
-		recup->ray.dirY = -1;
-	}
-}
-
-void	ft_orientationplan(t_recup *recup)
-{
-	if (recup->depart == 'N')
-	{
-		recup->ray.planX = 0;
-		recup->ray.planY = 0.66;
-	}
-	if (recup->depart == 'S')
-	{
-		recup->ray.planX = 0;
-		recup->ray.planY = -0.66;
-	}
-	if (recup->depart == 'E')
-	{
-		recup->ray.dirX = 0.66;
-		recup->ray.dirY = 0;
-	}
-	if (recup->depart == 'W')
-	{
-		recup->ray.dirX = -0.66;
-		recup->ray.dirY = 0;
-	}
 }

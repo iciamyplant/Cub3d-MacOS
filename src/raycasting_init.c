@@ -12,16 +12,32 @@ void	ft_initialisation2(t_recup *recup)
 	recup->data.rotate_left = 0;
 	recup->ray.posX = (double)recup->dx;
 	recup->ray.posY = (double)recup->dy;
-	ft_orientationdir(recup); //initialise dirX et dirY selon N S E W initial
-	ft_orientationplan(recup); //initialise planX et planY selon N S E W initial
+	recup->ray.dirX = 0;
+	recup->ray.dirY = 0;
+	recup->ray.planX = 0;
+	recup->ray.planY = 0;
+	if (recup->depart == 'N')
+		recup->ray.dirX = -1;
+	if (recup->depart == 'S')
+		recup->ray.dirX = 1;
+	if (recup->depart == 'E')
+		recup->ray.dirY = 1;
+	if (recup->depart == 'W')
+		recup->ray.dirY = -1;
+	if (recup->depart == 'N')
+		recup->ray.planY = 0.66;
+	if (recup->depart == 'S')
+		recup->ray.planY = -0.66;
+	if (recup->depart == 'E')
+		recup->ray.planX = 0.66;
+	if (recup->depart == 'W')
+		recup->ray.planX = -0.66;
 }
 
 void	ft_initialisation3(t_recup *recup)
 {
 	recup->ray.hit = 0;
-	recup->ray.cameraX = 0;
 	recup->ray.perpWallDist = 0;
-	recup->ray.color = 0;
 	recup->ray.cameraX = 2 * recup->ray.x / (double)recup->Rx - 1;
 	//calcul de la position du rayon sur le plan de la camera
 	recup->ray.rayDirX = recup->ray.dirX + recup->ray.planX * \
@@ -65,19 +81,16 @@ void	ft_init_sprite(t_recup *recup)
 	int i;
 	int j;
 
-	i = 0;
-	j = 0;
+	i = -1;
 	recup->s.nbspr = 0;
-	while (i < recup->nblines)
+	while (++i < recup->nblines)
 	{
-		j = 0;
-		while (j < recup->sizeline)
+		j = -1;
+		while (++j < recup->sizeline)
 		{
 			if (recup->map[i][j] == '2')
 				recup->s.nbspr += 1;
-			j++;
 		}
-		i++;
 	}
 	if (!(recup->sxy = (t_sprxy *)malloc(sizeof(t_sprxy) * recup->s.nbspr)))
 		ft_error(recup, "Malloc sxy*");
@@ -90,10 +103,11 @@ void	ft_init_sprite(t_recup *recup)
 
 void	ft_init_sprite2(t_recup *recup, int i, int j, int v)
 {
-	while (i < recup->nblines)
+	i = i - 1;
+	while (++i < recup->nblines)
 	{
-		j = 0;
-		while (j < recup->sizeline)
+		j = -1;
+		while (++j < recup->sizeline)
 		{
 			if (recup->map[i][j] == '2')
 			{
@@ -101,8 +115,6 @@ void	ft_init_sprite2(t_recup *recup, int i, int j, int v)
 				recup->sxy[v].y = (double)j + 0.5;
 				v++;
 			}
-			j++;
 		}
-		i++;
 	}
 }

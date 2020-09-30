@@ -4,13 +4,16 @@ void	my_color_cube(t_data *data, int x, int y, int color)
 {
 	int i;
 	int j;
+	(void)x;
+	(void)y;
+	(void)color;
 	j = 0;
 	while (j < data->minimapechelle)
 	{
 		i = 0;
 		while (i < data->minimapechelle)
 		{
-			my_mlx_pixel_put(data, y + i, x + j, color);
+			//my_mlx_pixel_put(data, y + i, x + j, color);
 			i++;
 		}
 		j++;
@@ -21,13 +24,16 @@ void	my_color_perso(t_data *data, int x, int y, int color)
 {
 	int i;
 	int j;
+	(void)x;
+	(void)y;
+	(void)color;
 	j = 0;
 	while (j < (data->minimapechelle / 3))
 	{
 		i = 0;
 		while (i < (data->minimapechelle / 3))
 		{
-			my_mlx_pixel_put(data, y + i, x + j, color);
+			//my_mlx_pixel_put(data, y + i, x + j, color);
 			i++;
 		}
 		j++;

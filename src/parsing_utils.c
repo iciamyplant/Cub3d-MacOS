@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 18:19:22 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/09/28 16:59:02 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/09/30 12:25:35 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,6 @@ void	ft_initialisation(t_recup *recup)
 	recup->dx = 0;
 	recup->dy = 0;
 	recup->depart = 'x';
+	recup->indicateur = 0;
+	recup->indicateur2 = 0;
 }

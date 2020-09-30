@@ -59,10 +59,6 @@ void	ft_calculs(t_recup *recup, int i)
     recup->s.drawEndX = recup->s.spriteWidth / 2 + recup->s.spriteScreenX;
     if (recup->s.drawEndX >= recup->Rx) 
 		recup->s.drawEndX = recup->Rx - 1;
-	//printf("recup->s.drawStartY = %d pour i = %d\n", recup->s.drawStartY, i);
-	//printf("recup->s.drawStartX = %d pour i = %d\n", recup->s.drawStartX, i);
-	//printf("recup->s.drawEndX = %d pour i = %d\n", recup->s.drawEndX, i);
-	//printf("recup->s.drawEndY = %d pour i = %d\n", recup->s.drawEndY, i);
 }
 
 void	ft_draw_spr(t_recup *recup, int y, int texX, int stripe)
@@ -78,8 +74,8 @@ void	ft_draw_spr(t_recup *recup, int y, int texX, int stripe)
 		texY = ((d * recup->texture[4].height) / recup->s.spriteHeight) / 256;
 		if (recup->texture[4].addr + (texX * (recup->texture[4].bits_per_pixel / 8) + texY * recup->texture[4].line_length))
 		{
-			dst = recup->texture[4].addr + (texX * (recup->texture[4].bits_per_pixel / 8) + texY * recup->texture[4].line_length);
-			dst2 = recup->data.addr + (stripe * (recup->data.bits_per_pixel / 8) + y * recup->data.line_length);
+			dst = (char *)recup->texture[4].addr + (texX * (recup->texture[4].bits_per_pixel / 8) + texY * recup->texture[4].line_length);
+			dst2 = (char *)recup->data.addr + (stripe * (recup->data.bits_per_pixel / 8) + y * recup->data.line_length);
 			if (*(unsigned int*)dst != 000)
 				*(unsigned int*)dst2 = *(unsigned int*)dst;
 		}

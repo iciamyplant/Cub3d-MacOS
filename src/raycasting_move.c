@@ -18,21 +18,25 @@ void    ft_forward_back(t_recup *recup)
 	}
 }
 
-void    ft_left_right(t_recup *recup)
+void	ft_left_right(t_recup *recup)
 {
-    if (recup->data.left == 1)
-	{
-		if (recup->map[(int)(recup->ray.posX + recup->ray.dirY)][(int)recup->ray.posY] != '1')
-			recup->ray.posX += recup->ray.dirY * recup->ray.movespeed;
-		if (recup->map[(int)(recup->ray.posX)][(int)(recup->ray.posY + recup->ray.dirX)] != '1')
-			recup->ray.posY += recup->ray.dirX * recup->ray.movespeed;
-	}
 	if (recup->data.right == 1)
 	{
-		if (recup->map[(int)(recup->ray.posX - recup->ray.dirY)][(int)recup->ray.posY] != '1')
+		if (recup->map[(int)(recup->ray.posX + recup->ray.dirY *
+					recup->ray.movespeed)][(int)recup->ray.posY] != '1')
+			recup->ray.posX += recup->ray.dirY * recup->ray.movespeed;
+		if (recup->map[(int)recup->ray.posX][(int)(recup->ray.posY - recup->ray.dirX *
+					recup->ray.movespeed)] != '1')
+			recup->ray.posY -=  recup->ray.dirX * recup->ray.movespeed;
+	}
+	if (recup->data.left == 1)
+	{
+		if (recup->map[(int)(recup->ray.posX - recup->ray.dirY *
+					recup->ray.movespeed)][(int)recup->ray.posY] != '1')
 			recup->ray.posX -= recup->ray.dirY * recup->ray.movespeed;
-		if (recup->map[(int)(recup->ray.posX)][(int)(recup->ray.posY - recup->ray.dirX)] != '1')
-			recup->ray.posY -= recup->ray.dirX * recup->ray.movespeed;
+		if (recup->map[(int)recup->ray.posX][(int)(recup->ray.posY + recup->ray.dirX *
+					recup->ray.movespeed)] != '1')
+			recup->ray.posY +=  recup->ray.dirX * recup->ray.movespeed;
 	}
 }
 

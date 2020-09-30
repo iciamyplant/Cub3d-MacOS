@@ -14,9 +14,14 @@ int		ft_parsing_map(char *fichier, t_recup *recup)
 		return (0);
 	while (ret != 0)
 	{
+		if (recup->indicateur == 1 && ft_is_map(str) == 0)
+			ft_error(recup, "Map invalide\n");
 		ret = get_next_line(fd, &str);
 		if (ft_is_map(str) == 1)
+		{
 			ft_copy_map(str, recup);
+			recup->indicateur = 1;
+		}
 		free(str);
 	}
 	close(fd);
@@ -46,6 +51,8 @@ void	ft_parsing(char *fichier, t_recup *recup)
 		free(str);
 	}
 	close(fd);
+	if (recup->sizeline == 0 || recup->nblines == 0)
+		ft_error(recup, "Map absente\n");
 	ft_parsing_map(fichier, recup);
 }
 

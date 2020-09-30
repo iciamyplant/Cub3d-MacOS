@@ -18,12 +18,13 @@ LIBFT_DIR = libft
 LIBFT = libft.a
 MLX_DIR = mlx
 MLX = libmlx.dylib
+CC = clang
 
 # diff entre .a et .dylib
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
-CFLAGS = -Wall -Wextra -Werror -MMD -O3
+CFLAGS = -Wall -Wextra -Werror -MMD
 
 OBJ_DIR = obj
 SRC_DIR = src
@@ -31,6 +32,9 @@ INC_DIR = inc
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
+
+.c.o:
+	${CC} ${CFLAGS} -c$< -o ${<:.c=.o}
 
 # -C faire make comme si on etait dana le dossier
 # -j multisreder / ameliore la vitesse de compliation
@@ -44,14 +48,14 @@ all:
 # -L donner le nom du dossier / -l donner le nom le la lib
 # loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
 $(NAME): $(OBJ)
-		@gcc $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -l mlx -L $(LIBFT_DIR) -l ft
+		${CC} $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -l mlx -L $(LIBFT_DIR) -l ft
 		@install_name_tool -change $(MLX) @loader_path/$(MLX_DIR)/$(MLX) $(NAME)
 		@echo $(NAME) : Created !
 
 # si le .c est plus recent que le .o on rentre dans la regle
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MLX_DIR)/$(MLX) $(LIBFT_DIR)/$(LIBFT) | .gitignore
 		@mkdir -p $(OBJ_DIR)
-		@gcc $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -I $(LIBFT_DIR) -c $< -o $@
+		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -I $(LIBFT_DIR) -c $< -o $@
 
 .gitignore:
 		@echo $(NAME) > .gitignore

@@ -84,7 +84,6 @@ typedef struct	s_ray
 	int			lineHeight; //hauteur de la ligne a dessiner
 	int			drawStart; //position de debut ou il faut dessiner
 	int			drawEnd; //position de fin ou il faut dessiner
-	int			color;
 	double		movespeed;
 	double		rotspeed;
 	int			x;
@@ -97,7 +96,7 @@ typedef struct		s_data
 	void		*mlx_ptr;
 	void		*mlx_win;
 	void		*img;
-	char		*addr;
+	int			*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -109,7 +108,9 @@ typedef struct		s_data
 	int			rotate_right;
 	int			minimapechelle;
 	int			width; // recup->texture.width : nombre de pixels de largeur de la texture
-	int 		height; // recup->texture.height : nombre de pixels dans la longueur de la texture
+	int 		height;// recup->texture.height : nombre de pixels dans la longueur de la texture
+	void		*img2;
+	int			*addr2;
 }					t_data;
 
 typedef struct		s_recup
@@ -132,6 +133,7 @@ typedef struct		s_recup
 	int			dx; //x de position depart
 	int			dy; //y position depart
 	int			indicateur;
+	int			indicateur2;
 	t_data		texture[5];
 	t_data		data;
 	t_ray		ray;
@@ -156,7 +158,7 @@ void		ft_color_resolution(char *str, t_recup *recup);
 int			ft_atoi2(const char *str, t_recup *recup);
 int			ft_atoi3(const char *str, t_recup *recup);
 void    	ft_texture(char *str, t_recup *recup);
-char		*ft_path_texture(char *str, t_recup *recup);
+char		*ft_path_texture(char *str, t_recup *recup, int j);
 //parsing_map.c
 void		ft_initialisation(t_recup *recup);
 int			ft_murs(t_recup *recup);
@@ -169,6 +171,7 @@ void		ft_init_sprite(t_recup *recup);
 //raycasting.c
 int			ft_raycasting(t_recup *recup);
 int			ft_mlx(t_recup *recup);
+void		ft_swap(t_recup *recup);
 //keysdraw.c
 int			ft_key_press(int keycode, t_recup *recup);
 int			ft_key_release(int keycode, t_recup *recup);
@@ -178,8 +181,6 @@ void		ft_draw_texture(t_recup *recup, int x, int y);
 //raycasting_init.c
 void		ft_initialisation2(t_recup *recup);
 void		ft_initialisation3(t_recup *recup);
-void		ft_orientationdir(t_recup *recup);
-void		ft_orientationplan(t_recup *recup);
 void		ft_init_texture(t_recup *recup);
 void		ft_init_sprite2(t_recup *recup, int i, int j, int v);
 //raycasting_utils.c
