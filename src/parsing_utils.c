@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 18:19:22 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/09/30 12:25:35 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/01 16:41:49 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int		ft_depart(char c, t_recup *recup, int i, int j)
 	return (0);
 }
 
-//verifie que tous les caracteres de str sont des '1'
 int		ft_murs_util(char *str)
 {
 	int i;

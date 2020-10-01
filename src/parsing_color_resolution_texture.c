@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_color_resolution_texture.c                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
+/*   Updated: 2020/10/01 16:38:45 by ebourdit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 int		ft_atoi2(const char *str, t_recup *recup)
@@ -31,10 +43,9 @@ int		ft_atoi3(const char *str, t_recup *recup)
 	sum = 0;
 	if (str[1] != ' ')
 		ft_error(recup, "Identifiant F ou C incorrect\n");
-	while (str[recup->i] == ' ' || str[recup->i] == '\t'
-			|| str[recup->i] == ',' || str[recup->i] == '\n'
-			|| str[recup->i] == '\r' || str[recup->i] == '\v'
-			|| str[recup->i] == '\f')
+	while (str[recup->i] == ' ' || str[recup->i] == '\t' || str[recup->i]
+			== ',' || str[recup->i] == '\n' || str[recup->i] == '\r'
+			|| str[recup->i] == '\v' || str[recup->i] == '\f')
 	{
 		recup->i++;
 		verify = 0;
@@ -79,7 +90,6 @@ char	*ft_path_texture(char *str, t_recup *recup, int j)
 	return (copie);
 }
 
-//parse pour NO, SO, WE, EA, S
 void	ft_texture(char *str, t_recup *recup)
 {
 	int			i;
@@ -104,40 +114,24 @@ void	ft_texture(char *str, t_recup *recup)
 	j++;
 }
 
-//parse pour R F et C
 void	ft_color_resolution(char *str, t_recup *recup)
 {
 	int			i;
 
 	i = 0;
 	recup->i = 1;
-	if ((recup->sizeline > 0 || recup->nblines > 0) && (recup->NO == NULL
-				|| recup->SO == NULL || recup->WE == NULL
-				|| recup->EA == NULL || recup->S == NULL))
+	if (recup->sizeline > 0 && (recup->NO == NULL || recup->SO == NULL ||
+				recup->WE == NULL || recup->EA == NULL || recup->S == NULL))
 		ft_error(recup, "Map avant elements ou elements manquants\n");
-	while (str[i] != '\0')
+	if (str[i] == 'R')
 	{
-		if (str[i] == 'R')
-		{
-			if (recup->sizeline > 0 || recup->nblines > 0)
-				ft_error(recup, "Map avant elements\n");
-			recup->Rx = ft_atoi2(str, recup);
-			recup->Ry = ft_atoi2(str, recup);
-			if (ft_atoi2(str, recup) > 0 || recup->Rx == 0 || recup->Ry == 0)
-				ft_error(recup, "Mauvais nombre de chiffres dans R\n");
-		}
-		else if (str[i] == 'F')
-		{
-			if (recup->sizeline > 0 || recup->nblines > 0)
-				ft_error(recup, "Map avant elements\n");
-			recup->F = ft_atoi3(str, recup);
-		}
-		else if (str[i] == 'C')
-		{
-			if (recup->sizeline > 0 || recup->nblines > 0)
-				ft_error(recup, "Map avant elements\n");
-			recup->C = ft_atoi3(str, recup);
-		}
-		i++;
+		recup->Rx = ft_atoi2(str, recup);
+		recup->Ry = ft_atoi2(str, recup);
+		if (ft_atoi2(str, recup) > 0 || recup->Rx == 0 || recup->Ry == 0)
+			ft_error(recup, "Mauvais nombre de chiffres dans R\n");
 	}
+	else if (str[i] == 'F')
+		recup->F = ft_atoi3(str, recup);
+	else if (str[i] == 'C')
+		recup->C = ft_atoi3(str, recup);
 }

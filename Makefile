@@ -6,7 +6,6 @@ SRC =	minimap.c \
 		keys_draw.c \
 		raycasting_init.c \
 		raycasting_utils.c \
-		hitpoints.c \
 		raycasting_move.c \
 		raycasting.c \
 		sprites.c \
@@ -24,7 +23,7 @@ CC = clang
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 OBJ_DIR = obj
 SRC_DIR = src

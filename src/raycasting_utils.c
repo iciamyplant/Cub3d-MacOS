@@ -69,3 +69,15 @@ void	ft_drawStartEnd(t_recup *recup)
 		if (recup->ray.drawEnd >= recup->Ry || recup->ray.drawEnd < 0)
 			recup->ray.drawEnd = recup->Ry - 1;
 }
+
+void	ft_swap(t_recup *recup)
+{
+	void *tmp;
+
+	tmp = recup->data.img;
+	recup->data.img = recup->data.img2;
+	recup->data.img2 = tmp;
+	tmp = recup->data.addr;
+	recup->data.addr = recup->data.addr2;
+	recup->data.addr2 = tmp;
+}

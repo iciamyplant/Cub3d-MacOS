@@ -49,15 +49,15 @@ void	ft_calculs(t_recup *recup, int i)
 	recup->s.drawStartY = -recup->s.spriteHeight / 2 + recup->Ry / 2;
 	if (recup->s.drawStartY < 0) 
 		recup->s.drawStartY = 0;
-   	recup->s.drawEndY = recup->s.spriteHeight / 2 + recup->Ry / 2;
-   	if (recup->s.drawEndY >= recup->Ry) 
+	recup->s.drawEndY = recup->s.spriteHeight / 2 + recup->Ry / 2;
+	if (recup->s.drawEndY >= recup->Ry) 
 		recup->s.drawEndY = recup->Ry - 1;
 	recup->s.spriteWidth = abs((int)(recup->Ry / (recup->s.transformY)));
- 	recup->s.drawStartX = -recup->s.spriteWidth / 2 + recup->s.spriteScreenX;
-  	if (recup->s.drawStartX < 0) 
+	recup->s.drawStartX = -recup->s.spriteWidth / 2 + recup->s.spriteScreenX;
+	if (recup->s.drawStartX < 0) 
 		recup->s.drawStartX = 0;
-    recup->s.drawEndX = recup->s.spriteWidth / 2 + recup->s.spriteScreenX;
-    if (recup->s.drawEndX >= recup->Rx) 
+	recup->s.drawEndX = recup->s.spriteWidth / 2 + recup->s.spriteScreenX;
+	if (recup->s.drawEndX >= recup->Rx) 
 		recup->s.drawEndX = recup->Rx - 1;
 }
 

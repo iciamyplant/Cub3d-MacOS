@@ -171,7 +171,6 @@ void		ft_init_sprite(t_recup *recup);
 //raycasting.c
 int			ft_raycasting(t_recup *recup);
 int			ft_mlx(t_recup *recup);
-void		ft_swap(t_recup *recup);
 //keysdraw.c
 int			ft_key_press(int keycode, t_recup *recup);
 int			ft_key_release(int keycode, t_recup *recup);
@@ -186,6 +185,7 @@ void		ft_init_sprite2(t_recup *recup, int i, int j, int v);
 void		ft_stepsideDist(t_recup *recup);
 void		ft_incrementray(t_recup *recup);
 void		ft_drawStartEnd(t_recup *recup);
+void		ft_swap(t_recup *recup);
 //raycasting_move.c
 void		ft_forward_back(t_recup *recup);
 void		ft_left_right(t_recup *recup);

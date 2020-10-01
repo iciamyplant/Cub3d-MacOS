@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
+/*   Updated: 2020/10/01 16:27:40 by ebourdit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
-//read une seconde fois pour recuperer la map
 int		ft_parsing_map(char *fichier, t_recup *recup)
 {
 	int			fd;
@@ -25,13 +36,11 @@ int		ft_parsing_map(char *fichier, t_recup *recup)
 		free(str);
 	}
 	close(fd);
-	ft_verify_errors(recup);
 	ft_init_sprite(recup);
 	ft_mlx(recup);
 	return (0);
 }
 
-//read une premiere fois pour recuperer tout sauf la map +nblines +sizelines
 void	ft_parsing(char *fichier, t_recup *recup)
 {
 	int			fd;
@@ -56,11 +65,10 @@ void	ft_parsing(char *fichier, t_recup *recup)
 	ft_parsing_map(fichier, recup);
 }
 
-//check si le fichier fichier finit bien par .cub
 int		ft_cub(char *str)
 {
-	int i;
-	t_recup recup;
+	int			i;
+	t_recup		recup;
 
 	i = 0;
 	while (str[i] != '\0')

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
+/*   Updated: 2020/10/01 16:21:34 by ebourdit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 void	my_color_cube(t_data *data, int x, int y, int color)
@@ -7,6 +19,7 @@ void	my_color_cube(t_data *data, int x, int y, int color)
 	(void)x;
 	(void)y;
 	(void)color;
+
 	j = 0;
 	while (j < data->minimapechelle)
 	{

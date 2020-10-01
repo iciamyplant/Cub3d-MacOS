@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
+/*   Updated: 2020/10/01 16:41:16 by ebourdit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
-//renvoie 1 si la map n'est pas entouree de murs 0 si tout est ok
 int		ft_murs(t_recup *recup)
 {
 	int i;
@@ -26,11 +37,10 @@ int		ft_murs(t_recup *recup)
 	return (0);
 }
 
-//copie str dans map
 int		ft_copy_map(char *str, t_recup *recup)
 {
-	static int i = 0;
-	int j;
+	static int	i = 0;
+	int			j;
 
 	j = 0;
 	recup->map[i] = NULL;
@@ -56,7 +66,6 @@ int		ft_copy_map(char *str, t_recup *recup)
 	return (0);
 }
 
-//check si la ligne fait partie de la map renvoie 1 si oui 0 sinon
 int		ft_is_map(char *str)
 {
 	int i;
@@ -77,12 +86,11 @@ int		ft_is_map(char *str)
 	return (0);
 }
 
-//recupere nblines et sizeline
 void	ft_map(char *str, t_recup *recup)
 {
-	int i;
-	static int snblines = 0;
-	static int ssizeline = 0;
+	int			i;
+	static int	snblines = 0;
+	static int	ssizeline = 0;
 
 	i = 0;
 	if (ft_is_map(str) == 1)
