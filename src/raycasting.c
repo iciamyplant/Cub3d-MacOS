@@ -34,9 +34,12 @@ void	ft_raycasting2(t_recup *recup)
 	recup->ray.x = 0;
 	while (recup->ray.x < recup->Rx) //seulement x car on imprime par bande
 	{
+		//write(1, "ca rentre\n", ft_strlen("ca rentre\n"));
 		ft_initialisation3(recup);
 		ft_stepsideDist(recup);
+		//write(1, "ok step\n", ft_strlen("ok step\n"));
 		ft_color_column(recup);
+		//write(1, "ok color_column\n", ft_strlen("ok color_column\n"));
 		recup->s.ZBuffer[recup->ray.x] = recup->ray.perpWallDist;
 		recup->ray.x++;
 	}
@@ -79,6 +82,7 @@ int		ft_mlx(t_recup *recup)
 	recup->data.img2 = mlx_new_image(recup->data.mlx_ptr, recup->Rx, recup->Ry);
 	recup->data.addr2 = (int *)mlx_get_data_addr(recup->data.img2, &recup->data.bits_per_pixel, \
 			&recup->data.line_length, &recup->data.endian);
+	//mlx_hook(recup->data.mlx_win, 33, 1L<<17, ft_test, recup);
 	mlx_hook(recup->data.mlx_win, 2, 1L<<0, ft_key_press, recup);
 	mlx_loop_hook(recup->data.mlx_ptr, ft_raycasting, recup);
 	mlx_hook(recup->data.mlx_win, 3, 1L<<1, ft_key_release, recup);

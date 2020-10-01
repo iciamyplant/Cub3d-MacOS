@@ -4,16 +4,16 @@ void    ft_forward_back(t_recup *recup)
 {
     if (recup->data.forward == 1)
 	{
-		if (recup->map[(int)(recup->ray.posX + recup->ray.dirX * recup->ray.movespeed)][(int)recup->ray.posY] != '1')
+		if (recup->map[(int)(recup->ray.posX + recup->ray.dirX * recup->ray.movespeed)][(int)recup->ray.posY] == '0')
 			recup->ray.posX += recup->ray.dirX * recup->ray.movespeed;
-		if (recup->map[(int)(recup->ray.posX)][(int)(recup->ray.posY + recup->ray.dirY * recup->ray.movespeed)] != '1') 
+		if (recup->map[(int)(recup->ray.posX)][(int)(recup->ray.posY + recup->ray.dirY * recup->ray.movespeed)] == '0') 
 			recup->ray.posY += recup->ray.dirY * recup->ray.movespeed;
 	}
     if (recup->data.back == 1)
 	{
-		if (recup->map[(int)(recup->ray.posX - recup->ray.dirX * recup->ray.movespeed)][(int)(recup->ray.posY)] != '1') 
+		if (recup->map[(int)(recup->ray.posX - recup->ray.dirX * recup->ray.movespeed)][(int)(recup->ray.posY)] == '0') 
 			recup->ray.posX -= recup->ray.dirX * recup->ray.movespeed;
-		if (recup->map[(int)(recup->ray.posX)][(int)(recup->ray.posY - recup->ray.dirY * recup->ray.movespeed)] != '1') 
+		if (recup->map[(int)(recup->ray.posX)][(int)(recup->ray.posY - recup->ray.dirY * recup->ray.movespeed)] == '0') 
 			recup->ray.posY -= recup->ray.dirY * recup->ray.movespeed;
 	}
 }
@@ -23,19 +23,19 @@ void	ft_left_right(t_recup *recup)
 	if (recup->data.right == 1)
 	{
 		if (recup->map[(int)(recup->ray.posX + recup->ray.dirY *
-					recup->ray.movespeed)][(int)recup->ray.posY] != '1')
+					recup->ray.movespeed)][(int)recup->ray.posY] == '0')
 			recup->ray.posX += recup->ray.dirY * recup->ray.movespeed;
 		if (recup->map[(int)recup->ray.posX][(int)(recup->ray.posY - recup->ray.dirX *
-					recup->ray.movespeed)] != '1')
+					recup->ray.movespeed)] == '0')
 			recup->ray.posY -=  recup->ray.dirX * recup->ray.movespeed;
 	}
 	if (recup->data.left == 1)
 	{
 		if (recup->map[(int)(recup->ray.posX - recup->ray.dirY *
-					recup->ray.movespeed)][(int)recup->ray.posY] != '1')
+					recup->ray.movespeed)][(int)recup->ray.posY] == '0')
 			recup->ray.posX -= recup->ray.dirY * recup->ray.movespeed;
 		if (recup->map[(int)recup->ray.posX][(int)(recup->ray.posY + recup->ray.dirX *
-					recup->ray.movespeed)] != '1')
+					recup->ray.movespeed)] == '0')
 			recup->ray.posY +=  recup->ray.dirX * recup->ray.movespeed;
 	}
 }

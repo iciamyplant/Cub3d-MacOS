@@ -66,6 +66,6 @@ void	ft_drawStartEnd(t_recup *recup)
 		if (recup->ray.drawStart < 0)
 			recup->ray.drawStart = 0;
 		recup->ray.drawEnd = recup->ray.lineHeight / 2 + recup->Ry / 2;
-		if (recup->ray.drawEnd >= recup->Ry)
+		if (recup->ray.drawEnd >= recup->Ry || recup->ray.drawEnd < 0)
 			recup->ray.drawEnd = recup->Ry - 1;
 }

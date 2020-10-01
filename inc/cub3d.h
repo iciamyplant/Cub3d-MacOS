@@ -12,12 +12,12 @@
 # include "../mlx/mlx.h"
 # include "libft.h"
 
-# define ROTATE_LEFT      123
-# define ROTATE_RIGHT     124
-# define FORWARD_W_Z      13
-# define BACK_S_S         1
-# define RIGHT_D_D        2
-# define LEFT_A_Q         0
+# define ROTATE_LEFT		123
+# define ROTATE_RIGHT		124
+# define FORWARD_W_Z		13
+# define BACK_S_S			1
+# define RIGHT_D_D			2
+# define LEFT_A_Q			0
 
 // # ifndef BUFFER_SIZE
 // # define BUFFER_SIZE 30
@@ -192,7 +192,7 @@ void		ft_left_right(t_recup *recup);
 void		ft_rotate_right_left(t_recup *recup);
 //errors.c
 void		ft_error(t_recup *recup, char *str);
-void		ft_exit(t_recup *recup);
+int			ft_exit(t_recup *recup);
 void		ft_verify_errors(t_recup *recup);
 //--------------SPRITES----------------//
 //sprites.c

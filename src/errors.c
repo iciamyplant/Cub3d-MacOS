@@ -17,7 +17,7 @@ void	ft_error(t_recup *recup, char *str)
 	ft_exit(recup);
 }
 
-void	ft_exit(t_recup *recup)
+int		ft_exit(t_recup *recup)
 {
 	if (recup->data.img)
 		mlx_destroy_image(recup->data.mlx_ptr, recup->data.img);
