@@ -176,7 +176,6 @@ void		ft_swap(t_recup *recup);
 int			ft_key_press(int keycode, t_recup *recup);
 int			ft_key_release(int keycode, t_recup *recup);
 int			ft_color_column(t_recup *recup);
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		ft_draw_texture(t_recup *recup, int x, int y);
 //raycasting_init.c
 void		ft_initialisation2(t_recup *recup);

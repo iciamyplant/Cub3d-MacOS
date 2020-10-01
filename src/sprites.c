@@ -65,20 +65,13 @@ void	ft_draw_spr(t_recup *recup, int y, int texX, int stripe)
 {
 	int 	d;
 	int		texY;
-	char	*dst;
-	char	*dst2;
 
 	while (y < recup->s.drawEndY)
 	{
 		d = (y) * 256 - recup->Ry * 128 + recup->s.spriteHeight * 128;
 		texY = ((d * recup->texture[4].height) / recup->s.spriteHeight) / 256;
-		if (recup->texture[4].addr + (texX * (recup->texture[4].bits_per_pixel / 8) + texY * recup->texture[4].line_length))
-		{
-			dst = (char *)recup->texture[4].addr + (texX * (recup->texture[4].bits_per_pixel / 8) + texY * recup->texture[4].line_length);
-			dst2 = (char *)recup->data.addr + (stripe * (recup->data.bits_per_pixel / 8) + y * recup->data.line_length);
-			if (*(unsigned int*)dst != 000)
-				*(unsigned int*)dst2 = *(unsigned int*)dst;
-		}
+		if (recup->texture[4].addr[texY * recup->texture[4].line_length / 4 + texX] != 000)
+			recup->data.addr[y * recup->data.line_length / 4 + stripe] = recup->texture[4].addr[texY * recup->texture[4].line_length / 4 + texX];
 		y++;
 	}
 }
