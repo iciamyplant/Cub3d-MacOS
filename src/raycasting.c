@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/01 17:05:32 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/03 17:48:00 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int		ft_raycasting(t_recup *recup)
 		recup->ray.x++;
 	}
 	ft_sprite(recup);
+	if (recup->save == 1)
+		ft_save(recup);
 	mlx_put_image_to_window(recup->data.mlx_ptr, recup->data.mlx_win,
 			recup->data.img, 0, 0);
 	ft_forward_back(recup);
@@ -82,11 +84,13 @@ int		ft_mlx(t_recup *recup)
 	ft_initialisation2(recup);
 	recup->data.mlx_ptr = mlx_init();
 	ft_get_texture(recup);
-	recup->data.mlx_win = mlx_new_window(recup->data.mlx_ptr, recup->Rx,
-			recup->Ry, "Hello world!");
 	recup->data.img = mlx_new_image(recup->data.mlx_ptr, recup->Rx, recup->Ry);
 	recup->data.addr = (int *)mlx_get_data_addr(recup->data.img, &recup->data.
 			bits_per_pixel, &recup->data.line_length, &recup->data.endian);
+	if (recup->save == 1)
+		ft_raycasting(recup);
+	recup->data.mlx_win = mlx_new_window(recup->data.mlx_ptr, recup->Rx,
+			recup->Ry, "Hello world!");
 	recup->data.img2 = mlx_new_image(recup->data.mlx_ptr, recup->Rx, recup->Ry);
 	recup->data.addr2 = (int *)mlx_get_data_addr(recup->data.img2, &recup->
 			data.bits_per_pixel, &recup->data.line_length, &recup->data.endian);

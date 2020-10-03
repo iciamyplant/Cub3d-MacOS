@@ -6,7 +6,6 @@ void	ft_dist_order(t_recup *recup)
 	int		j = 0;
 	double	tmp;
 
-	// Calculez la distance de chaque sprite au joueur
 	while (i < recup->s.nbspr)
 	{
 		recup->s.order[i] = i;
@@ -15,7 +14,6 @@ void	ft_dist_order(t_recup *recup)
 					recup->sxy[i].y) * (recup->ray.posY - recup->sxy[i].y));
 		i++;
 	}
-	// utilisez cette distance pour trier les sprites, du plus éloigné au plus proche de la caméra
 	i = 0;
 	while (i < recup->s.nbspr)
 	{
@@ -51,14 +49,14 @@ void	ft_calculs(t_recup *recup, int i)
 		recup->s.drawStartY = 0;
 	recup->s.drawEndY = recup->s.spriteHeight / 2 + recup->Ry / 2;
 	if (recup->s.drawEndY >= recup->Ry) 
-		recup->s.drawEndY = recup->Ry - 1;
+		recup->s.drawEndY = recup->Ry;
 	recup->s.spriteWidth = abs((int)(recup->Ry / (recup->s.transformY)));
 	recup->s.drawStartX = -recup->s.spriteWidth / 2 + recup->s.spriteScreenX;
 	if (recup->s.drawStartX < 0) 
 		recup->s.drawStartX = 0;
 	recup->s.drawEndX = recup->s.spriteWidth / 2 + recup->s.spriteScreenX;
-	if (recup->s.drawEndX >= recup->Rx) 
-		recup->s.drawEndX = recup->Rx - 1;
+	if (recup->s.drawEndX >= recup->Rx)
+		recup->s.drawEndX = recup->Rx;
 }
 
 void	ft_draw_spr(t_recup *recup, int y, int texX, int stripe)
@@ -91,7 +89,7 @@ void	ft_sprite(t_recup *recup)
 		while (stripe < recup->s.drawEndX)
 		{
 			texX = (int)(256 * (stripe - (-recup->s.spriteWidth / 2 + recup->s.spriteScreenX)) * recup->texture[4].width / recup->s.spriteWidth) / 256;
-			if (recup->s.transformY > 0 && stripe > 0 && stripe < recup->Rx && recup->s.transformY < recup->s.ZBuffer[stripe])
+			if (recup->s.transformY > 0 && stripe >= 0 && stripe < recup->Rx && recup->s.transformY < recup->s.ZBuffer[stripe])
 			{
 				y = recup->s.drawStartY;
 				ft_draw_spr(recup, y, texX, stripe);

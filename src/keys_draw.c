@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/01 17:30:33 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/03 16:00:30 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ int		ft_color_column(t_recup *recup)
 
 	j = -1;
 	i = recup->ray.drawEnd;
-	while (++j <= recup->ray.drawStart)
+	while (++j < recup->ray.drawStart)
 		recup->data.addr[j * recup->data.line_length / 4 +
 			recup->ray.x] = recup->C;
 	if (j <= recup->ray.drawEnd)
 		ft_draw_texture(recup, recup->ray.x, j);
-	j = i - 1;
+	j = i;
 	while (++j < recup->Ry)
 		recup->data.addr[j * recup->data.line_length / 4 +
 			recup->ray.x] = recup->F;
@@ -69,7 +69,7 @@ int		ft_color_column(t_recup *recup)
 
 void	ft_draw_texture(t_recup *recup, int x, int y)
 {
-	y = recup->ray.drawStart;
+	y = recup->ray.drawStart - 1;
 	ft_init_texture(recup);
 	recup->t.step = 1.0 * recup->texture[0].height / recup->ray.lineHeight;
 	recup->t.texX = (int)(recup->t.wallX * (double)recup->texture
@@ -82,12 +82,12 @@ void	ft_draw_texture(t_recup *recup, int x, int y)
 			recup->t.texX - 1;
 	recup->t.texPos = (recup->ray.drawStart - recup->Ry / 2 +
 			recup->ray.lineHeight / 2) * recup->t.step;
-	while (y++ <= recup->ray.drawEnd)
+	while (++y <= recup->ray.drawEnd)
 	{
 		recup->t.texY = (int)recup->t.texPos &
 			(recup->texture[recup->t.texdir].height - 1);
 		recup->t.texPos += recup->t.step;
-		if (texY < recup->Ry && texX < recup->Rx)
+		if (y < recup->Ry && x < recup->Rx)
 			recup->data.addr[y * recup->data.line_length / 4 + x] =
 				recup->texture[recup->t.texdir].addr[recup->t.texY *
 					recup->texture[recup->t.texdir].line_length / 4 + recup->t.texX];

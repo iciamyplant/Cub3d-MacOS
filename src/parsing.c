@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/01 16:27:40 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/03 17:47:35 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,9 @@ void	ft_parsing(char *fichier, t_recup *recup)
 	ft_parsing_map(fichier, recup);
 }
 
-int		ft_cub(char *str)
+int		ft_cub(char *str, t_recup *recup)
 {
 	int			i;
-	t_recup		recup;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -78,21 +77,29 @@ int		ft_cub(char *str)
 		i--;
 		if (i == 0)
 		{
-			ft_error(&recup, "Nom de la map invalide\n");
+			ft_error(recup, "Nom de la map invalide\n");
 			return (0);
 		}
 	}
 	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
-		ft_parsing(str, &recup);
+		ft_parsing(str, recup);
 	else
-		ft_error(&recup, "Nom de la map invalide\n");
+		ft_error(recup, "Nom de la map invalide\n");
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
-	if (argc >= 2)
-		ft_cub(argv[1]);
+	t_recup recup;
+	recup.save = 0;
+
+	if (argc == 2 || argc == 3)
+	{
+		if (argc == 3)
+			recup.save = 1;
+		ft_cub(argv[1], &recup);
+		//system("leaks Cub3d");
+	}
 	else
 		write(1, "Error\nNombre d'arguments invalide\n", 35);
 }

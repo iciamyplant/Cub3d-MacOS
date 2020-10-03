@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/01 16:14:54 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/03 18:26:37 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,56 @@ int		ft_exit(t_recup *recup)
 	if (recup->data.mlx_win)
 		mlx_destroy_window(recup->data.mlx_ptr, recup->data.mlx_win);
 	exit(0);
+}
+
+void			ft_header(t_recup *recup, int fd)
+{
+	int tmp;
+
+	write(fd, "BM", 2); //BM indique qu'il s'agit d'un Bitmap.
+	tmp = 14 + 40 + 4 * recup->Rx * recup->Ry; //taille totale du fichier
+	write(fd, &tmp, 4);
+	tmp = 0;
+	write(fd, &tmp, 2); //champ réservé
+	write(fd, &tmp, 2);
+	tmp = 54; //offset de l'image
+	write(fd, &tmp, 4);
+	tmp = 40; //taille image en octets
+	write(fd, &tmp, 4);
+	write(fd, &recup->Rx, 4); //taille image horizontalement
+	write(fd, &recup->Ry, 4); //taille image verticalement
+	tmp = 1; //nombre de plans (toujours 1)
+	write(fd, &tmp, 2);
+	write(fd, &recup->data.bits_per_pixel, 2); //nombre de bits utilisés pour coder la couleur
+	tmp = 0; //methode de compression 0 si image non compressee
+	write(fd, &tmp, 4);
+	write(fd, &tmp, 4);
+	write(fd, &tmp, 4);
+	write(fd, &tmp, 4);
+	write(fd, &tmp, 4);
+	write(fd, &tmp, 4);
+}
+
+void	ft_save(t_recup *recup)
+{
+	int fd;
+	int	x;
+	int	y;
+
+	y = recup->Ry;
+	if ((fd = open("./image.bmp", O_CREAT | O_RDWR)) == -1)
+		ft_error(recup, "Impossible de creer .bmp\n");
+	ft_header(recup, fd);
+	while (y >= 0)
+	{
+		x = 0;
+		while (x < recup->Rx)
+		{
+			write(fd, &recup->data.addr[y * recup->data.line_length / 4 + x], 4);
+			x++;
+		}
+		y--;
+	}
+	system("chmod 777 image.bmp"); //pour pouvoir voir limage dans le finder
+	exit (0);
 }

@@ -134,6 +134,7 @@ typedef struct		s_recup
 	int			dy; //y position depart
 	int			indicateur;
 	int			indicateur2;
+	int			save;
 	t_data		texture[5];
 	t_data		data;
 	t_ray		ray;
@@ -144,7 +145,7 @@ typedef struct		s_recup
 
 //--------------PARSING----------------//
 //parsing.c
-int			ft_cub(char *str);
+int			ft_cub(char *str, t_recup *recup);
 void		ft_parsing(char *fichier, t_recup *recup);
 int			ft_parsing_map(char *fichier, t_recup *recup);
 void		ft_imprime_map(t_recup *recup);
@@ -194,10 +195,11 @@ void		ft_rotate_right_left(t_recup *recup);
 void		ft_error(t_recup *recup, char *str);
 int			ft_exit(t_recup *recup);
 void		ft_verify_errors(t_recup *recup);
+void		ft_header(t_recup *recup, int fd);
+void		ft_save(t_recup *recup);
 //--------------SPRITES----------------//
 //sprites.c
 void		ft_sprite(t_recup *recup);
-
 
 //--------------BONUS----------------//
 //minimap.c
