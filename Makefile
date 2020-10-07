@@ -9,12 +9,12 @@ SRC =	minimap.c \
 		raycasting_move.c \
 		raycasting.c \
 		sprites.c \
-		errors.c
+		errors.c \
+		get_next_line.c \
+		get_next_line_utils.c
 
 NAME = Cub3D
 
-LIBFT_DIR = libft
-LIBFT = libft.a
 MLX_DIR = mlx
 MLX = libmlx.dylib
 CC = clang
@@ -40,34 +40,30 @@ DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
 # Pas de regle opti car makefile mlx pas compatible
 all:
 	@$(MAKE) -C $(MLX_DIR)
-	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -j $(NAME)
 
 # permet de pouvoir comparer la derniere modification de la dep par rapport a la regle
 # -L donner le nom du dossier / -l donner le nom le la lib
 # loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
 $(NAME): $(OBJ)
-		${CC} $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -l mlx -L $(LIBFT_DIR) -l ft
+		${CC} $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -l mlx
 		@install_name_tool -change $(MLX) @loader_path/$(MLX_DIR)/$(MLX) $(NAME)
 		@echo $(NAME) : Created !
 
 # si le .c est plus recent que le .o on rentre dans la regle
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MLX_DIR)/$(MLX) $(LIBFT_DIR)/$(LIBFT) | .gitignore
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MLX_DIR)/$(MLX) | .gitignore
 		@mkdir -p $(OBJ_DIR)
-		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -I $(LIBFT_DIR) -c $< -o $@
+		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -c $< -o $@
 
 .gitignore:
 		@echo $(NAME) > .gitignore
 
 clean:
 	@$(MAKE) clean -C $(MLX_DIR)
-	@$(MAKE) clean -C $(LIBFT_DIR)
 	@rm -rf $(OBJ_DIR)
 	@echo "obj deleted"
 
 fclean:	clean
-	@rm -rf $(LIBFT_DIR)/$(LIBFT)
-	@echo "[$(LIBFT)]: deleted"
 	@rm -rf $(NAME)
 	@echo "[$(NAME)]: deleted"
 

@@ -10,7 +10,6 @@
 # include <string.h>
 # include <math.h>
 # include "../mlx/mlx.h"
-# include "libft.h"
 
 # define ROTATE_LEFT		123
 # define ROTATE_RIGHT		124
@@ -19,9 +18,17 @@
 # define RIGHT_D_D			2
 # define LEFT_A_Q			0
 
-// # ifndef BUFFER_SIZE
-// # define BUFFER_SIZE 30
-// # endif
+# ifdef Darwin
+#  define SYS 	1
+# endif
+
+# ifdef Linux
+#  define SYS	2
+# endif
+
+# ifndef BUFFER_SIZE
+# define BUFFER_SIZE 30
+# endif
 
 typedef struct	s_sprxy
 {
@@ -155,11 +162,11 @@ int			ft_charinstr(char *str, char c);
 int			ft_murs_util(char *str);
 int			ft_depart(char c, t_recup *recup, int i, int j);
 //parsing_color_resolution_texture.c
-void		ft_color_resolution(char *str, t_recup *recup);
+void		ft_color_resolution(char **str, t_recup *recup);
 int			ft_atoi2(const char *str, t_recup *recup);
 int			ft_atoi3(const char *str, t_recup *recup);
 void    	ft_texture(char *str, t_recup *recup);
-char		*ft_path_texture(char *str, t_recup *recup, int j);
+int			ft_path_texture(char *str, char **texture, t_recup *recup, int j);
 //parsing_map.c
 void		ft_initialisation(t_recup *recup);
 int			ft_murs(t_recup *recup);
@@ -209,5 +216,10 @@ void		my_color_perso(t_data *data, int x, int y, int color);
 //hitpoints.c
 void		ft_hitpoints(t_recup *recup);
 
+int			get_next_line(int fd, char **line);
+int			ft_strlen(char *str);
+char		*ft_strjoin(char *s1, char *s2);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_subbuff(char *buff, int start, int len);
 
 #endif

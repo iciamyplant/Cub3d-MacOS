@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/01 16:38:45 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:17:20 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,9 @@ int		ft_atoi3(const char *str, t_recup *recup)
 	return (sum);
 }
 
-char	*ft_path_texture(char *str, t_recup *recup, int j)
+int		ft_path_texture(char *str, char **texture, t_recup *recup, int j)
 {
 	int		i;
-	char	*copie;
 
 	i = 0;
 	if (ft_charinstr(str, '.') == 0 || ft_charinstr(str, '/') == 0
@@ -78,16 +77,16 @@ char	*ft_path_texture(char *str, t_recup *recup, int j)
 			ft_error(recup, "Identifiant ou path texture invalide");
 		j++;
 	}
-	if (!(copie = (malloc(sizeof(char) * (ft_strlen2(str) + 1)))))
-		return (NULL);
+	if (!(*texture = (char *)(malloc(sizeof(char) * (ft_strlen2(str) + 1)))))
+		ft_error(recup, "Malloc texture parsing impossible\n");
 	while (str[j] != '\0')
 	{
-		copie[i] = str[j];
+		(*texture)[i] = str[j];
 		i++;
 		j++;
 	}
-	copie[i] = '\0';
-	return (copie);
+	(*texture)[i] = '\0';
+	return (0);
 }
 
 void	ft_texture(char *str, t_recup *recup)
@@ -97,15 +96,15 @@ void	ft_texture(char *str, t_recup *recup)
 
 	i = 0;
 	if (str[i] == 'N' && str[i + 1] == 'O')
-		recup->NO = ft_path_texture(str, recup, 2);
+		ft_path_texture(str, &recup->NO, recup, 2);
 	else if (str[i] == 'S' && str[i + 1] == 'O')
-		recup->SO = ft_path_texture(str, recup, 2);
+		ft_path_texture(str, &recup->SO, recup, 2);
 	else if (str[i] == 'W' && str[i + 1] == 'E')
-		recup->WE = ft_path_texture(str, recup, 2);
+		ft_path_texture(str, &recup->WE, recup, 2);
 	else if (str[i] == 'E' && str[i + 1] == 'A')
-		recup->EA = ft_path_texture(str, recup, 2);
+		ft_path_texture(str, &recup->EA, recup, 2);
 	else if (str[i] == 'S' && str[i + 1] != 'O')
-		recup->S = ft_path_texture(str, recup, 1);
+		ft_path_texture(str, &recup->S, recup, 1);
 	else if (str[0] != 'N' && str[0] != 'S' && str[0] != 'W' && str[0] != 'E'
 			&& str[0] != 'R' && str[0] != 'F' && str[0] != 'C'
 			&& str[0] > 65 && str[0] < 122)
@@ -114,7 +113,7 @@ void	ft_texture(char *str, t_recup *recup)
 	j++;
 }
 
-void	ft_color_resolution(char *str, t_recup *recup)
+void	ft_color_resolution(char **str, t_recup *recup)
 {
 	int			i;
 
@@ -122,16 +121,19 @@ void	ft_color_resolution(char *str, t_recup *recup)
 	recup->i = 1;
 	if (recup->sizeline > 0 && (recup->NO == NULL || recup->SO == NULL ||
 				recup->WE == NULL || recup->EA == NULL || recup->S == NULL))
-		ft_error(recup, "Map avant elements ou elements manquants\n");
-	if (str[i] == 'R')
 	{
-		recup->Rx = ft_atoi2(str, recup);
-		recup->Ry = ft_atoi2(str, recup);
-		if (ft_atoi2(str, recup) > 0 || recup->Rx == 0 || recup->Ry == 0)
+		free(*str);
+		ft_error(recup, "Map avant elements ou elements manquants\n");
+	}
+	if (*str[i] == 'R')
+	{
+		recup->Rx = ft_atoi2(*str, recup);
+		recup->Ry = ft_atoi2(*str, recup);
+		if (ft_atoi2(*str, recup) > 0 || recup->Rx == 0 || recup->Ry == 0)
 			ft_error(recup, "Mauvais nombre de chiffres dans R\n");
 	}
-	else if (str[i] == 'F')
-		recup->F = ft_atoi3(str, recup);
-	else if (str[i] == 'C')
-		recup->C = ft_atoi3(str, recup);
+	else if (*str[i] == 'F')
+		recup->F = ft_atoi3(*str, recup);
+	else if (*str[i] == 'C')
+		recup->C = ft_atoi3(*str, recup);
 }

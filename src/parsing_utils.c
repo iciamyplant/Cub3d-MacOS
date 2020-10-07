@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 18:19:22 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/01 16:41:49 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/07 16:13:46 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ int		ft_charinstr(char *str, char c)
 	int i;
 
 	i = 0;
-	while (str[i])
+	if (!str)
+		return (0);
+	while (str[i] != '\0')
 	{
 		if (str[i] == c)
 			return (1);
@@ -88,6 +90,12 @@ void	ft_initialisation(t_recup *recup)
 	recup->dx = 0;
 	recup->dy = 0;
 	recup->depart = 'x';
-	recup->indicateur = 0;
 	recup->indicateur2 = 0;
+	recup->data.img = NULL;
+	recup->texture[0].img = NULL;
+	recup->texture[1].img = NULL;
+	recup->texture[2].img = NULL;
+	recup->texture[3].img = NULL;
+	recup->texture[4].img = NULL;
+	recup->data.mlx_win = NULL;
 }

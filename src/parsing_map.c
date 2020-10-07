@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/01 16:41:16 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/07 16:12:54 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,16 @@ int		ft_is_map(char *str)
 	int i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	if (ft_charinstr(str, '1') == 1)
 	{
 		while (str[i] != '\0')
 		{
 			if (str[i] != ' ' && str[i] != '0' && str[i] != '1' \
 					&& str[i] != '2' && str[i] != 'N' && str[i] != 'S' \
-					&& str[i] != 'E' && str[i] != 'W')
+					&& str[i] != 'E' && str[i] != 'W' && str[i] != '\n'
+					&& str[i] != '\t')
 				return (0);
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/03 17:47:35 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:17:07 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,15 @@ int		ft_parsing_map(char *fichier, t_recup *recup)
 		return (0);
 	while (ret != 0)
 	{
-		if (recup->indicateur == 1 && ft_is_map(str) == 0)
-			ft_error(recup, "Map invalide\n");
 		ret = get_next_line(fd, &str);
 		if (ft_is_map(str) == 1)
-		{
 			ft_copy_map(str, recup);
-			recup->indicateur = 1;
-		}
 		free(str);
 	}
 	close(fd);
-	ft_init_sprite(recup);
-	ft_mlx(recup);
+	printf("passe");
+	//ft_init_sprite(recup);
+	//ft_mlx(recup);
 	return (0);
 }
 
@@ -54,7 +50,7 @@ void	ft_parsing(char *fichier, t_recup *recup)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
-		ft_color_resolution(str, recup);
+		ft_color_resolution(&str, recup);
 		ft_texture(str, recup);
 		ft_map(str, recup);
 		free(str);
@@ -62,7 +58,7 @@ void	ft_parsing(char *fichier, t_recup *recup)
 	close(fd);
 	if (recup->sizeline == 0 || recup->nblines == 0)
 		ft_error(recup, "Map absente\n");
-	ft_parsing_map(fichier, recup);
+//	ft_parsing_map(fichier, recup);
 }
 
 int		ft_cub(char *str, t_recup *recup)
@@ -98,7 +94,8 @@ int		main(int argc, char **argv)
 		if (argc == 3)
 			recup.save = 1;
 		ft_cub(argv[1], &recup);
-		//system("leaks Cub3d");
+	//	system("leaks Cub3D");
+		ft_error(&recup, "ok");
 	}
 	else
 		write(1, "Error\nNombre d'arguments invalide\n", 35);

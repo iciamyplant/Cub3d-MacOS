@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/03 18:26:37 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:31:31 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,29 @@ void	ft_verify_errors(t_recup *recup)
 
 void	ft_error(t_recup *recup, char *str)
 {
+	int i;
+
+	i = -1;
 	write(1, "Error\n", 6);
 	write(1, str, ft_strlen(str));
+	if (recup->NO)
+		free(recup->NO);
+	if (recup->SO)
+		free(recup->SO);
+	if (recup->WE)
+		free(recup->WE);
+	if (recup->EA)
+		free(recup->EA);
+	if (recup->S)
+		free(recup->S);
+//	while (++i < recup->nblines)
+//		free(recup->map[i]);
+	if (recup->map)
+		free(recup->map);
+/*	while (i != 0)
+	{
+		system("leaks Cub3D");
+	}*/
 	ft_exit(recup);
 }
 
