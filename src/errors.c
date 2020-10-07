@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/07 17:31:31 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:51:53 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	ft_error(t_recup *recup, char *str)
 	i = -1;
 	write(1, "Error\n", 6);
 	write(1, str, ft_strlen(str));
+
+/////////////////free textures
 	if (recup->NO)
 		free(recup->NO);
 	if (recup->SO)
@@ -39,10 +41,29 @@ void	ft_error(t_recup *recup, char *str)
 		free(recup->EA);
 	if (recup->S)
 		free(recup->S);
-//	while (++i < recup->nblines)
-//		free(recup->map[i]);
+
+/////////////////free la map
+	if (recup->map)
+	{
+		while (++i < recup->nblines)
+			free(recup->map[i]);
+	}
 	if (recup->map)
 		free(recup->map);
+
+/////////////////free sorder, sdist, sxy
+	if (recup->s.order)
+		free(recup->s.order);
+	if (recup->s.dist)
+		free(recup->s.dist);
+//	if (recup->sxy)
+//		free(recup->sxy);
+
+//////////////////free zbuffer
+//	if (recup->s.Zbuffer)
+//		free(recup->s.Zbuffer);
+
+
 /*	while (i != 0)
 	{
 		system("leaks Cub3D");

@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/07 17:17:20 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:59:37 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,9 @@ void	ft_color_resolution(char **str, t_recup *recup)
 		recup->Rx = ft_atoi2(*str, recup);
 		recup->Ry = ft_atoi2(*str, recup);
 		if (ft_atoi2(*str, recup) > 0 || recup->Rx == 0 || recup->Ry == 0)
+		{
 			ft_error(recup, "Mauvais nombre de chiffres dans R\n");
+		}
 	}
 	else if (*str[i] == 'F')
 		recup->F = ft_atoi3(*str, recup);

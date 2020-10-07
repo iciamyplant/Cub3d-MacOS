@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 18:19:22 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/07 16:13:46 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:51:49 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,7 @@ void	ft_initialisation(t_recup *recup)
 	recup->texture[3].img = NULL;
 	recup->texture[4].img = NULL;
 	recup->data.mlx_win = NULL;
+	recup->map = NULL;
+	recup->s.order = NULL;
+	recup->s.dist = NULL;
 }

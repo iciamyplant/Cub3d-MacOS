@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/07 17:17:07 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:17:54 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	ft_parsing(char *fichier, t_recup *recup)
 		free(str);
 	}
 	close(fd);
-	if (recup->sizeline == 0 || recup->nblines == 0)
-		ft_error(recup, "Map absente\n");
+	//if (recup->sizeline == 0 || recup->nblines == 0)
+	//	ft_error(recup, "Map absente\n");
 //	ft_parsing_map(fichier, recup);
 }
 
