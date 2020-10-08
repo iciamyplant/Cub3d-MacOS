@@ -1,7 +1,8 @@
-R  2000 1400
+R  1000 1000
 NO            ./textures/red.xpm
 SO ./textures/bluestone.xpm
 EA ./textures/greystone.xpm
+WE ./textures/red.xpm
 
 S ./textures/tonneau.xpm
 F 200,             255,255

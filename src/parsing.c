@@ -6,7 +6,7 @@
 /*   By: ebourdit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 10:38:41 by ebourdit          #+#    #+#             */
-/*   Updated: 2020/10/07 18:17:54 by ebourdit         ###   ########.fr       */
+/*   Updated: 2020/10/08 10:57:42 by ebourdit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ int		ft_parsing_map(char *fichier, t_recup *recup)
 		free(str);
 	}
 	close(fd);
-	printf("passe");
-	//ft_init_sprite(recup);
-	//ft_mlx(recup);
+	ft_init_sprite(recup);
+	ft_mlx(recup);
 	return (0);
 }
 
@@ -56,9 +55,9 @@ void	ft_parsing(char *fichier, t_recup *recup)
 		free(str);
 	}
 	close(fd);
-	//if (recup->sizeline == 0 || recup->nblines == 0)
-	//	ft_error(recup, "Map absente\n");
-//	ft_parsing_map(fichier, recup);
+	if (recup->sizeline == 0 || recup->nblines == 0)
+		ft_error(recup, "Map absente\n");
+	ft_parsing_map(fichier, recup);
 }
 
 int		ft_cub(char *str, t_recup *recup)
@@ -94,8 +93,6 @@ int		main(int argc, char **argv)
 		if (argc == 3)
 			recup.save = 1;
 		ft_cub(argv[1], &recup);
-	//	system("leaks Cub3D");
-		ft_error(&recup, "ok");
 	}
 	else
 		write(1, "Error\nNombre d'arguments invalide\n", 35);
